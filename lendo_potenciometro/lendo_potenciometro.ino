@@ -27,7 +27,7 @@ void loop() {
   vPot = map(vPot, 0, 1023, 0, 255); 
   // Escreve na comunicação serial
   Serial.print("Potênciometro: ");
-  // Escreve e quebra a linha "[ENTER]"
+  // Escreve e quebra a linha "[ENTER]" ou "\n"
   Serial.println(vPot);
   // Espera meio segundo (1s = 1000ms)
   delay(500);
