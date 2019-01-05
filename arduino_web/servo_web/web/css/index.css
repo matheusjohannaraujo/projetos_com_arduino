@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+html{
+    padding: 5px;
+    background: aqua;
+}
+
+html, body{
+    height: 100%;
+}
+
+body{
+    border-radius: 5px;
+    background: rgba(0, 0, 0, .1);
+}
+
+section{
+    position: relative;
+    top: 33%;
+    padding: 10px;
+    text-align: center;
+}
+
+section > label{
+    display: block;
+    margin-top: 20px;    
+    font-weight: bold;
+    font-size: 1.7em;
+    margin-bottom: 30px;
+}
+
+#angulo{
+    padding: 5px;
+    border-radius: 3px;
+    box-shadow: 0px 1px 1px #888;
+    transform: scale(2);
+}
