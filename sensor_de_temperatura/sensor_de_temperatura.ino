@@ -1,9 +1,7 @@
-/*
-  Country: Brasil
-  State: Pernambuco
-  Developer: Matheus Johann Araújo
-  Date: 2018-05-17
-*/
+// Country: Brasil
+// State: Pernambuco
+// Developer: Matheus Johann Araújo
+// Date: 2018-05-17
 
 // Definindo a porta analógica utilizada pelo sensor de temperatura - Sensor LM35
 #define temp A0

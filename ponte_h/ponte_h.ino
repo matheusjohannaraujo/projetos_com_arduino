@@ -1,9 +1,7 @@
-/*
-  Country: Brasil
-  State: Pernambuco
-  Developer: Matheus Johann Araújo
-  Date: 2018-01-13
-*/
+// Country: Brasil
+// State: Pernambuco
+// Developer: Matheus Johann Araújo
+// Date: 2018-01-13
 
 // Declaração das portas a serem utilizadas
 #define pinoVelocidade 10 // ENA

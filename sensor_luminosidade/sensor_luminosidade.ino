@@ -1,9 +1,7 @@
-/*
-  Country: Brasil
-  State: Pernambuco
-  Developer: Matheus Johann Araújo
-  Date: 2018-07-02
-*/
+// Country: Brasil
+// State: Pernambuco
+// Developer: Matheus Johann Araújo
+// Date: 2018-07-02
 
 // Definindo porta do sensor LDR (Fotoresistor)
 #define ldr A2

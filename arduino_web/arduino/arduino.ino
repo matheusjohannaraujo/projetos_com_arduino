@@ -1,9 +1,7 @@
-/*
-  Country: Brasil
-  State: Pernambuco
-  Developer: Matheus Johann Araújo
-  Date: 2018-03-07
-*/
+// Country: Brasil
+// State: Pernambuco
+// Developer: Matheus Johann Araújo
+// Date: 2018-03-07
 
 // Definindo porta do LED em um pino PWM - Valores possíveis (0 até 255) onde o pino pode fornecer de 0 Volt até +5 Volts
 #define led 11

@@ -1,9 +1,7 @@
-/*
-  Country: Brasil
-  State: Pernambuco
-  Developer: Matheus Johann Araújo
-  Date: 2017-09-28
-*/
+// Country: Brasil
+// State: Pernambuco
+// Developer: Matheus Johann Araújo
+// Date: 2017-09-28
 
 // Declaração das variáveis que possuem os pinos utilizados pelo Sensor de Distância Ultrassônico HC-SR04
 int pinTrig = 1;

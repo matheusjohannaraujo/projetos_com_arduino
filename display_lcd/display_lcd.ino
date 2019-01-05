@@ -1,8 +1,6 @@
-/*
-  Autor: Professor Bruno P. Campos
-  Vídeo - CFB CURSOS: https://www.youtube.com/watch?v=qhM7UwUiXVQ&list=PLx4x_zx8csUgWBTvA-fluHV970SzDJRBw&index=33
-  OBS.: Eu Matheus Johann Araújo, somente comentei as instruções abaixo.
-*/
+// Autor: Professor Bruno P. Campos
+// Vídeo - CFB CURSOS: https://www.youtube.com/watch?v=qhM7UwUiXVQ&list=PLx4x_zx8csUgWBTvA-fluHV970SzDJRBw&index=33
+// OBS.: Eu Matheus Johann Araújo, somente comentei as instruções abaixo.
 
 #include <LiquidCrystal.h>
 
