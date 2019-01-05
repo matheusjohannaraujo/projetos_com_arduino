@@ -27,7 +27,7 @@ section{
 }
 
 section > button{
-    padding: 15px;
+    padding: 12px 15px;
     margin-left: 5px;
     margin-right: 5px;
     background: #c00;
@@ -36,14 +36,15 @@ section > button{
     font-size: 1em;
     text-shadow: 1px 1px 1px #444;
     border: none;
-    transition: 1s;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px #900;
+    transition: .5s;
 }
 
 section > button:hover{
-    transition: .5s;
-    border-radius: 10px;
-    border: 1px solid #444;
+    transition: .25s;
     cursor: pointer;
+    box-shadow: none;
     background: #900;
 }
 

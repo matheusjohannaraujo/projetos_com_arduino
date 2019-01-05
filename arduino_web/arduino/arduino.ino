@@ -5,16 +5,15 @@
   Date: 2018-03-07
 */
 
-#define led 13
+#define led 11
+String resultado = "";
 
 void setup() {
   pinMode(led, OUTPUT);
   Serial.begin(9600);
 }
 
-/*
- * Função que lê uma string da Serial e retorna-a.
- */
+// Função que lê uma string da Serial e retorna-a.
 String leStringSerial(){
   String conteudo = "";
   char caractere;  
@@ -38,12 +37,14 @@ String leStringSerial(){
 void loop() {
   String str = leStringSerial();
   if(str == "L"){
-    analogWrite(led, 130);
-    Serial.println("LED LIGADO!");
-    delay(100);
+    resultado = "LED LIGADO!";
+    Serial.println(resultado);
+    analogWrite(led, 130);    
   }else if(str == "D"){
-    analogWrite(led, 0); 
-    Serial.println("LED DESLIGADO!");
-    delay(100);
+    resultado = "LED DESLIGADO!";
+    Serial.println(resultado);
+    analogWrite(led, 0);    
+  }else if(str == "R"){
+    Serial.println(resultado);
   }
 }
