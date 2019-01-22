@@ -18,7 +18,7 @@ void setup(){
 
 // Função que mede a distância com o utrassônico, recebe como parâmetro os pinos Trigger e Echo em formato de ponteiro
 // E tem como retorno um valor inteiro sem sinal (número natural), esse valor é a distância medida em cm.
-unsigned int distanciaUltrasonico(int *pinTrig, int *pinEcho){
+unsigned int distanciaUltrassonico(int *pinTrig, int *pinEcho){
   // Escreve valor desligado no pino do Trig (controlando a porta do Arduino)
   digitalWrite(*pinTrig, LOW);
   // Espera dois micro segundos
@@ -39,9 +39,9 @@ int distancia = 0;
 // Função secundária e de repetição infinita
 void loop(){
   // Ler o sensor e retorna a distância em cm e guarda o valor na variável
-  distancia = distanciaUltrasonico(&pinTrig, &pinEcho);
+  distancia = distanciaUltrassonico(&pinTrig, &pinEcho);
   // Escreve na comunicação serial
-  Serial.print("Distância: ");
+  Serial.print("Utrassônico: ");
   Serial.print(distancia);
   Serial.println("cm");
   // Espera um segundo (1s = 1000ms)
