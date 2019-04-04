@@ -1,7 +1,7 @@
 https://github.com/matheusjohannaraujo/projetos_com_arduino
 
-Country: Brasil
-State: Pernambuco
-Developer: Matheus Johann Araújo
+Country: Brasil<br>
+State: Pernambuco<br>
+Developer: Matheus Johann Araújo<br>
 
 Códigos para uso em Arduino
