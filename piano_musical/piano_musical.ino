@@ -3,7 +3,7 @@
 Função: Piano Musical
 Desenvolvido por: Matheus Johann Araújo
 E-mail: matheusjohannaraujo@gmail.com
-GitHub: https://github.com/matheusjohannaraujo/projetos_com_arduino/piano_musical/
+GitHub: https://github.com/matheusjohannaraujo/projetos_com_arduino/tree/master/piano_musical
 Data: 15/04/2019
 
 */
