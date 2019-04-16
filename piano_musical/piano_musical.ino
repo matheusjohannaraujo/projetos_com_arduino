@@ -6,6 +6,7 @@
   Data: 16/04/2019
 */
 // Carrega a biblioteca do Sensor Ultrassonico HC-SR04 ao Arduino
+// https://github.com/filipeflop/Ultrasonic
 #include <Ultrasonic.h>
 
 // Notas
@@ -60,8 +61,7 @@ void setPinOut(int *vet, int len) {
 }
 
 void playUltraSoundLed(int distancia, int numeroSensor) {
-  Serial.println("Utrassônico " + String(numeroSensor) + ": " + String(distancia) + "cm");
-  numeroSensor--;
+  Serial.println("Utrassônico " + String(numeroSensor--) + ": " + String(distancia) + "cm");
   if (distancia >= minDistan && distancia <= maxDistan) {
     Serial.println("Cifra: " + String(cifra_5[numeroSensor]));
     tone(pinBuzz, nota_5[numeroSensor], delayBuzz);
