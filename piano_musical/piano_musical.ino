@@ -1,12 +1,12 @@
 /*
-
   Função: Piano Musical
   Desenvolvido por: Matheus Johann Araújo
   E-mail: matheusjohannaraujo@gmail.com
   GitHub: https://github.com/matheusjohannaraujo/projetos_com_arduino/tree/master/piano_musical
-  Data: 15/04/2019
-
+  Data: 16/04/2019
 */
+// Carrega a biblioteca do Sensor Ultrassonico HC-SR04 ao Arduino
+#include <Ultrasonic.h>
 
 // Notas
 #define NOTE_C4 262
@@ -24,6 +24,11 @@
 #define NOTE_A5 880
 #define NOTE_B5 988
 
+// Constantes
+#define minDistan 3
+#define maxDistan 25
+#define delayBuzz 250
+
 // Pinos
 #define pinBuzz 10
 #define pinButt 11
@@ -31,28 +36,19 @@ const int nota_4[] = { NOTE_C4, NOTE_D4, NOTE_E4, NOTE_F4, NOTE_G4, NOTE_A4, NOT
 const int nota_5[] = { NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_A5, NOTE_B5, NOTE_C5 };
 const String cifra_4[] = { "C4", "D4", "E4", "F4", "G4", "A4", "B4", "C4" };
 const String cifra_5[] = { "C5", "D5", "E5", "F5", "G5", "A5", "B5", "C5" };
-const int pinUltraTrig[] = { 22, 24, 26, 28, 30, 32, 34, 36 };
-const int pinUltraEcho[] = { 23, 25, 27, 29, 31, 33, 35, 37 };
 const int pinLed[] = { 2, 3, 4, 5, 6, 7, 8, 9 };
 
+// Inicializa o sensor nos pinos definidos acima
+Ultrasonic ultrasonic_1(22, 23);
+Ultrasonic ultrasonic_2(24, 25);
+Ultrasonic ultrasonic_3(26, 27);
+Ultrasonic ultrasonic_4(28, 29);
+Ultrasonic ultrasonic_5(30, 31);
+Ultrasonic ultrasonic_6(32, 33);
+Ultrasonic ultrasonic_7(34, 35);
+Ultrasonic ultrasonic_8(36, 37);
 
-// Constantes
-#define delayBuzz 250
-#define maxDistan 25
-
-void setup() {
-  setPinOut(pinUltraTrig, sizeof(pinUltraTrig) / sizeof(int));
-  setPinInp(pinUltraEcho, sizeof(pinUltraEcho) / sizeof(int));
-  setPinOut(pinLed, sizeof(pinLed) / sizeof(int));
-  pinMode(pinBuzz, OUTPUT);
-  pinMode(pinButt, INPUT);
-  Serial.begin(9600);
-}
-
-void loop() {
-  playUltraSoundLed();
-}
-
+// Funções
 void setPinInp(int *vet, int len) {
   for (int i = 0; i < len; i++)
     pinMode(vet[i], INPUT);
@@ -63,34 +59,33 @@ void setPinOut(int *vet, int len) {
     pinMode(vet[i], OUTPUT);
 }
 
-// Função que mede a distância com o utrassônico, recebe como parâmetro os pinos Trigger e Echo em formato de ponteiro
-// E tem como retorno um valor inteiro sem sinal (número natural), esse valor é a distância medida em cm.
-unsigned int distanciaUltrassonico(int pinTrig, int pinEcho) {
-  // Escreve valor desligado no pino do Trig (controlando a porta do Arduino)
-  digitalWrite(pinTrig, LOW);
-  // Espera dois micro segundos
-  delayMicroseconds(2);
-  // Escreve valor ligado no pino do Trig (controlando a porta do Arduino)
-  digitalWrite(pinTrig, HIGH);
-  // Espera dez micro segundos
-  delayMicroseconds(10);
-  // Escreve valor desligado no pino do Trig (controlando a porta do Arduino)
-  digitalWrite(pinTrig, LOW);
-  // Faz a leitura pulso no pino Echo, e divide o valor da leitura por 58. Com isso obtem-se a distância em centímetros
-  return (pulseIn(pinEcho, HIGH) / 58);
+void playUltraSoundLed(int distancia, int numeroSensor) {
+  Serial.println("Utrassônico " + String(numeroSensor) + ": " + String(distancia) + "cm");
+  numeroSensor--;
+  if (distancia >= minDistan && distancia <= maxDistan) {
+    Serial.println("Cifra: " + String(cifra_5[numeroSensor]));
+    tone(pinBuzz, nota_5[numeroSensor], delayBuzz);
+    digitalWrite(pinLed[numeroSensor], HIGH);
+    delay(delayBuzz);
+    noTone(pinBuzz);
+    digitalWrite(pinLed[numeroSensor], LOW);
+  }
 }
 
-void playUltraSoundLed() {
-  for (int i = 0; i < 8; i++) {
-    int distancia = distanciaUltrassonico(pinUltraTrig[i], pinUltraEcho[i]);
-    Serial.println("Utrassônico " + String(i + 1) + ": " + String(distancia) + "cm");
-    if (distancia > 2 && distancia <= maxDistan) {
-      Serial.println("Cifra: " + String(cifra_5[i]));
-      tone(pinBuzz, nota_5[i], delayBuzz);
-      digitalWrite(pinLed[i], HIGH);
-      delay(delayBuzz);
-      noTone(pinBuzz);
-      digitalWrite(pinLed[i], LOW);
-    }
-  }
+void setup() {
+  setPinOut(pinLed, sizeof(pinLed) / sizeof(int));
+  pinMode(pinBuzz, OUTPUT);
+  pinMode(pinButt, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  playUltraSoundLed(ultrasonic_1.convert(ultrasonic_1.timing(), Ultrasonic::CM), 1);
+  playUltraSoundLed(ultrasonic_2.convert(ultrasonic_2.timing(), Ultrasonic::CM), 2);
+  playUltraSoundLed(ultrasonic_3.convert(ultrasonic_3.timing(), Ultrasonic::CM), 3);
+  playUltraSoundLed(ultrasonic_4.convert(ultrasonic_4.timing(), Ultrasonic::CM), 4);
+  playUltraSoundLed(ultrasonic_5.convert(ultrasonic_5.timing(), Ultrasonic::CM), 5);
+  playUltraSoundLed(ultrasonic_6.convert(ultrasonic_6.timing(), Ultrasonic::CM), 6);
+  playUltraSoundLed(ultrasonic_7.convert(ultrasonic_7.timing(), Ultrasonic::CM), 7);
+  playUltraSoundLed(ultrasonic_8.convert(ultrasonic_8.timing(), Ultrasonic::CM), 8);
 }
