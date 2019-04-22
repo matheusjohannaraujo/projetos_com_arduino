@@ -3,7 +3,7 @@
   Desenvolvido por: Matheus Johann Araújo
   E-mail: matheusjohannaraujo@gmail.com
   GitHub: https://github.com/matheusjohannaraujo/projetos_com_arduino/tree/master/piano_musical
-  Data: 16/04/2019
+  Data: 21/04/2019
 */
 // Carrega a biblioteca do Sensor Ultrassonico HC-SR04 ao Arduino
 // https://github.com/filipeflop/Ultrasonic
@@ -18,25 +18,17 @@
 #define NOTE_A4 440
 #define NOTE_B4 494
 #define NOTE_C5 523
-#define NOTE_D5 587
-#define NOTE_E5 659
-#define NOTE_F5 698
-#define NOTE_G5 784
-#define NOTE_A5 880
-#define NOTE_B5 988
 
 // Constantes
 #define minDistan 3
-#define maxDistan 25
+#define maxDistan 40
 #define delayBuzz 250
 
 // Pinos
 #define pinBuzz 10
 #define pinButt 11
-const int nota_4[] = { NOTE_C4, NOTE_D4, NOTE_E4, NOTE_F4, NOTE_G4, NOTE_A4, NOTE_B4, NOTE_C4 };
-const int nota_5[] = { NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_A5, NOTE_B5, NOTE_C5 };
-const String cifra_4[] = { "C4", "D4", "E4", "F4", "G4", "A4", "B4", "C4" };
-const String cifra_5[] = { "C5", "D5", "E5", "F5", "G5", "A5", "B5", "C5" };
+const int nota[] = { NOTE_C4, NOTE_D4, NOTE_E4, NOTE_F4, NOTE_G4, NOTE_A4, NOTE_B4, NOTE_C5 };
+const String cifra[] = { "C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5" };
 const int pinLed[] = { 2, 3, 4, 5, 6, 7, 8, 9 };
 
 // Inicializa o sensor nos pinos definidos acima
@@ -63,8 +55,8 @@ void setPinOut(int *vet, int len) {
 void playUltraSoundLed(int distancia, int numeroSensor) {
   Serial.println("Utrassônico " + String(numeroSensor--) + ": " + String(distancia) + "cm");
   if (distancia >= minDistan && distancia <= maxDistan) {
-    Serial.println("Cifra: " + String(cifra_5[numeroSensor]));
-    tone(pinBuzz, nota_5[numeroSensor], delayBuzz);
+    Serial.println("Cifra: " + String(cifra[numeroSensor]));
+    tone(pinBuzz, nota[numeroSensor], delayBuzz);
     digitalWrite(pinLed[numeroSensor], HIGH);
     delay(delayBuzz);
     noTone(pinBuzz);
