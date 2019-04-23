@@ -3,7 +3,7 @@
   Desenvolvido por: Matheus Johann Araújo
   E-mail: matheusjohannaraujo@gmail.com
   GitHub: https://github.com/matheusjohannaraujo/projetos_com_arduino/tree/master/piano_musical
-  Data: 21/04/2019
+  Data: 23/04/2019
 */
 // Carrega a biblioteca do Sensor Ultrassonico HC-SR04 ao Arduino
 // https://github.com/filipeflop/Ultrasonic
@@ -52,6 +52,41 @@ void setPinOut(int *vet, int len) {
     pinMode(vet[i], OUTPUT);
 }
 
+// Gravador de notas
+const int vet_size = 128;
+int vet_int[vet_size];
+int vet_count = 0;
+
+void insereVet(int i) {
+  if (vet_count == vet_size) {
+    vet_count = 0;
+  }
+  vet_int[vet_count++] = i;
+}
+
+void limpaVet() {
+  for (int i = 0, x = 0; i < vet_size; i++) {
+    insereVet(-1);
+  }
+}
+
+void tocarVet() {
+  for (int i = 0; i < vet_size; i++) {
+    int x = vet_int[i];
+    if (x == -1) {
+      break;
+    }
+    Serial.println("Numero da nota: " + String(x) + ", Cifra: " + String(cifra[x]));
+    tone(pinBuzz, nota[x], delayBuzz);
+    digitalWrite(pinLed, HIGH);
+    delay(delayBuzz);
+    noTone(pinBuzz);
+    digitalWrite(pinLed, LOW);
+  }
+  vet_count = 0;
+  limpaVet();
+}
+
 void playUltraSoundLed(int distancia, int numeroSensor) {
   Serial.println("Utrassônico " + String(numeroSensor--) + ": " + String(distancia) + "cm");
   if (distancia >= minDistan && distancia <= maxDistan) {
@@ -61,6 +96,10 @@ void playUltraSoundLed(int distancia, int numeroSensor) {
     delay(delayBuzz);
     noTone(pinBuzz);
     digitalWrite(pinLed[numeroSensor], LOW);
+    insereVet(numeroSensor);
+  }
+  if (digitalRead(pinButt)) {
+    tocarVet();
   }
 }
 
@@ -69,6 +108,7 @@ void setup() {
   pinMode(pinBuzz, OUTPUT);
   pinMode(pinButt, INPUT);
   Serial.begin(9600);
+  limpaVet();
 }
 
 void loop() {
