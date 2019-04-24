@@ -3,7 +3,7 @@
   Desenvolvido por: Matheus Johann Araújo
   E-mail: matheusjohannaraujo@gmail.com
   GitHub: https://github.com/matheusjohannaraujo/projetos_com_arduino/tree/master/piano_musical
-  Data: 23/04/2019
+  Data: 24/04/2019
 */
 // Carrega a biblioteca do Sensor Ultrassonico HC-SR04 ao Arduino
 // https://github.com/filipeflop/Ultrasonic
@@ -66,7 +66,7 @@ void insereVet(int i) {
 
 void limpaVet() {
   for (int i = 0, x = 0; i < vet_size; i++) {
-    insereVet(-1);
+    vet_int[i] = -1;
   }
 }
 
