@@ -5,7 +5,6 @@
   GitHub: https://github.com/matheusjohannaraujo/projetos_com_arduino/tree/master/placar_eletronico
   Data: 15/04/2019
 */
-
 #include <EEPROM.h>
 
 const int btn_mais_a = 6;
