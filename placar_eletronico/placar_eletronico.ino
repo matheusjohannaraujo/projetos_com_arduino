@@ -7,10 +7,10 @@
 */
 #include <EEPROM.h>
 
-const int btn_mais_a = 6;
-const int btn_menos_a = 7;
-const int btn_mais_b = 8;
-const int btn_menos_b = 9;
+const int btn_mais_a = 2;
+const int btn_menos_a = 5;
+const int btn_mais_b = 4;
+const int btn_menos_b = 5;
 
 const int led_1 = 22;
 const int led_2[] = {23, 24, 25, 26, 27, 28, 29};
@@ -44,8 +44,15 @@ const int segmentos[10][7] = { // 11 linhas, 8 colunas
   { 1, 1, 1, 1, 0, 1, 1 }, //9
 };
 
-int contador_a = 0, bk_contador_a = 0;
-int contador_b = 0, bk_contador_b = 0;
+int contador_a = 0, contador_b = 0, eeAddress = 0;
+
+struct contadores
+{
+  int a;
+  int b;
+};
+
+struct contadores var_contadores;
 
 void cduLedsA(int valor) {
   const int c = valor / 100;
@@ -159,26 +166,40 @@ void setup() {
   pinMode(btn_mais_b, INPUT);
   pinMode(btn_menos_b, INPUT);
   checkLedPin();
-  contador_a = EEPROM.read(bk_contador_a);
-  contador_b = EEPROM.read(bk_contador_b);
+  EEPROM.get(eeAddress, var_contadores);
+  contador_a = var_contadores.a;
+  contador_b = var_contadores.b;
   cduLedsA(contador_a);
   cduLedsB(contador_b);
 }
 
 void loop() {
-  if (!digitalRead(btn_mais_a))
+  if (!digitalRead(btn_mais_a)) {
+    Serial.println("BTN_A +");
     incrementoA();
-  if (!digitalRead(btn_menos_a))
+  }
+  if (!digitalRead(btn_menos_a)) {
+    Serial.println("BTN_A -");
     decrementoA();
-  if (!digitalRead(btn_mais_a) && !digitalRead(btn_menos_a))
+  }
+  if (!digitalRead(btn_mais_a) && !digitalRead(btn_menos_a)) {
+    Serial.println("BTN_A (+) e (-)");
     contador_a = 0;
-  /*if (!digitalRead(btn_mais_b))
+  }
+  if (!digitalRead(btn_mais_b)) {
+    Serial.println("BTN_B +");
     incrementoB();
-    if (!digitalRead(btn_menos_b))
+  }
+  if (!digitalRead(btn_menos_b)) {
+    Serial.println("BTN_B -");
     decrementoB();
-    if (!digitalRead(btn_mais_b) && !digitalRead(btn_menos_b))
-    contador_b = 0;*/
+  }
+  if (!digitalRead(btn_mais_b) && !digitalRead(btn_menos_b)) {
+    Serial.println("BTN_B (+) e (-)");
+    contador_b = 0;
+  }
   delay(200);
-  EEPROM.write(bk_contador_a, contador_a);
-  //EEPROM.write(bk_contador_b, contador_b);
+  var_contadores.a = contador_a;
+  var_contadores.b = contador_b;
+  EEPROM.put(eeAddress, var_contadores);
 }
