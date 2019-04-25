@@ -3,12 +3,12 @@
   Desenvolvido por: Matheus Johann Araújo
   E-mail: matheusjohannaraujo@gmail.com
   GitHub: https://github.com/matheusjohannaraujo/projetos_com_arduino/tree/master/placar_eletronico
-  Data: 25/04/2019
+  Data: 15/04/2019
 */
 #include <EEPROM.h>
 
-const int btn_mais_a = 2;
-const int btn_menos_a = 5;
+const int btn_mais_a = 5;
+const int btn_menos_a = 2;
 const int btn_mais_b = 4;
 const int btn_menos_b = 3;
 
@@ -132,7 +132,7 @@ void checkLedPin() {
     digitalWrite(led_3[i], !HIGH);
     digitalWrite(led_5[i], !HIGH);
     digitalWrite(led_6[i], !HIGH);
-    delay(500);
+    delay(1000);
     digitalWrite(led_2[i], !LOW);
     digitalWrite(led_3[i], !LOW);
     digitalWrite(led_5[i], !LOW);
@@ -145,7 +145,7 @@ void checkLedPin() {
     mostrarNumero(30, i);
     mostrarNumero(38, i);
     mostrarNumero(45, i);
-    delay(500);
+    delay(1000);
   }
   digitalWrite(led_1, !LOW);
   digitalWrite(led_4, !LOW);
@@ -165,7 +165,7 @@ void setup() {
   pinMode(btn_menos_a, INPUT);
   pinMode(btn_mais_b, INPUT);
   pinMode(btn_menos_b, INPUT);
-  checkLedPin();
+  checkLedPin();  
   EEPROM.get(eeAddress, var_contadores);
   contador_a = var_contadores.a;
   contador_b = var_contadores.b;
