@@ -3,14 +3,14 @@
   Desenvolvido por: Matheus Johann Araújo
   E-mail: matheusjohannaraujo@gmail.com
   GitHub: https://github.com/matheusjohannaraujo/projetos_com_arduino/tree/master/placar_eletronico
-  Data: 15/04/2019
+  Data: 25/04/2019
 */
 #include <EEPROM.h>
 
 const int btn_mais_a = 2;
 const int btn_menos_a = 5;
 const int btn_mais_b = 4;
-const int btn_menos_b = 5;
+const int btn_menos_b = 3;
 
 const int led_1 = 22;
 const int led_2[] = {23, 24, 25, 26, 27, 28, 29};
