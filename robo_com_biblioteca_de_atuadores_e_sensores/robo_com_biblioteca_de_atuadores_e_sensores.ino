@@ -1,19 +1,34 @@
 /*
- 
+
   GitHub: https://github.com/matheusjohannaraujo/projetos_com_arduino
   Country: Brasil
   State: Pernambuco
   Developer: Matheus Johann Araújo
   Date: 2019-07-31
-  
+
+  OBS.: Portas usadas do Arduino Mega 2560.
+        Caso seja outro, altere as portas.
+
 */
 
-// Incluindo todas as bibliotecas.
-//#include "ATUADOR_PH.h"
+// -------------- Incluindo bibliotecas --------------
+
+// Ponte H
+//#include "ATUADOR_PH.h" 
+
+// Shield Motor
 #include "ATUADOR_SM.h"
+
+// Sensor Infravermelho de Luz.
 #include "SENSOR_IR.h"
+
+// Sensor Infravermelho de Distância.
 #include "SENSOR_IR_SHARP.h"
+
+// Sensor Ultrassônico de Distância.
 #include "SENSOR_ULTRA.h"
+
+// ------------ Bibliotecas Incluídas -----------
 
 // Definindo as variáveis responsáveis pelo controle de motor e sensor.
 //ATUADOR_PH motores;
@@ -37,10 +52,10 @@ void setup() {
   // Variável que controla todas as saídas de informação de debug.
   bool debug = true;
 
-  // Ponte H -> Define todos os pinos da controladora de motores, e ativa (true) ou desativa (false) o debug das informações relativas a ponte h.
+  // Ponte H -> Define todos as portas da controladora de motores, e ativa (true) ou desativa (false) o debug das informações relativas a ponte h.
   // motores.definir(3, 2, 4, 5, 7, 6, debug);// (ENA, IN1, IN2, IN3, IN4, ENB, Debug)
 
-  // Shield Motor -> Define os pinos da controladora de motores (Motor A e Motor B), e ativa (true) ou desativa (false) o debug das informações relativas ao shield motores.
+  // Shield Motor -> Define as portas da controladora de motores (Motor A e Motor B), e ativa (true) ou desativa (false) o debug das informações relativas ao shield motores.
   motores.definir(3, 4, debug);// (MA, MB, Debug)
 
   // Sensor Infravermelho de Luz -> Definindo as portas dos Sensores IR, o tipo Digital (true) ou Analógico (false) e se o debug será ativado (true) ou desativado (false).
@@ -49,17 +64,17 @@ void setup() {
   s3.definir(24, true, debug);// (Porta, Tipo, Debug) -> Sensor 3.
   s4.definir(25, true, debug);// (Porta, Tipo, Debug) -> Sensor 4.
 
-  // Sensor Ultrassônico de Distância -> Definindo a porta do sensor do Trigger, Echo, Debug (ativado = true, desativado = false).
+  // Sensor Ultrassônico de Distância -> Definindo as portas do sensor (Trigger e Echo) e o Debug (ativado = true, desativado = false).
   ultra.definir(52, 53, debug);// (Trig, Echo, Debug)
 
-  // Sensor Infravermelho de Distância -> Definindo a porta, modelo do sensor e se o debug será ativado (true) ou desativado (false).
+  // Sensor Infravermelho de Distância -> Definindo a porta analógica do sensor, modelo do sensor e se o debug será ativado (true) ou desativado (false).
   sharp.definir(A8, 1080, debug);// (AnalogPort, Model, Debug)
 }
 
 void loop() {
   // Chamando funções.
   obstaculo();
-  seguidor();  
+  seguidor();
   // Verifica se existe informação na comunicação serial.
   if (Serial.available() > 0) {
     // Armazena o caractere da comunicação serial para controle do robô.
