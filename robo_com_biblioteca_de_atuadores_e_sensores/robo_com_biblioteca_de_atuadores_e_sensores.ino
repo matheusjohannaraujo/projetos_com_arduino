@@ -11,7 +11,7 @@
 
 */
 
-// -------------- Incluindo bibliotecas --------------
+// ----------- Incluindo bibliotecas -----------
 
 // Ponte H
 //#include "ATUADOR_PH.h" 
